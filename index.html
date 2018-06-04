@@ -1,0 +1,483 @@
+<meta charset="utf-8">
+<style type="text/css">
+body {
+	font-family:Helvetica, Arial;
+	color: #909090;
+	background:#090909;
+}
+button {
+	border:1px solid #888;
+	border-radius: 3px;
+}
+input[type="text"] {
+	border:1px solid #888;
+	border-radius: 3px;
+	text-align:center;
+}
+select {
+	border:1px solid #888;
+	border-radius: 3px;
+}
+input[type="range"] {
+	height:20px;
+	vertical-align:middle;
+}
+input[type="range"]::-ms-tooltip {
+	display:none;
+}
+</style>
+
+<link rel="icon" href="data:image/vnd.microsoft.icon;base64,AAABAAMAEBAQAAAABAAoAQAANgAAABAQAAAAABgAaAMAAF4BAAAgIAAAAAAYAKgMAADGBAAAKAAAABAAAAAgAAAAAQAEAAAAAACAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAIAAAIAAAACAgACAAAAAgACAAICAAACAgIAAwMDAAAAA/wAA/wAAAP//AP8AAAD/AP8A//8AAP///wBERERERERERE/////////0T///d3////RP//eZl3//9E//eZmZd//0T/+Zf/mX//RP/5l/+Zf/9E//mXf5l//0T//5l3mf//RP//eZmf//9E/////////0T//3/3d3//RP/5d3mZd/9E//+Zmf+f/0T/////////RERERERERERAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAAAEAAAACAAAAABABgAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICgQEBgQEBgQIC//Dw/+Tk9dTU89LS8tHR3cDAzrOzy6+v4sPD89PT7c3N8NDQ68vL1re3gQEBgQIC//j4//Dw/dzc/dzcpI60cWKgo47MvaSyd2dntJ2d9NTU99fX9NTU3L29gQEBgQIC//z8/+fn/+HhdWbrAgL/c2S6noroEg/8aFvgdmdtrpeX99fX99fX3r+/gQEBgQIC//v7/+Li0cHvAgL/Hxv3d2dn99fXjHroAgL/V0zZcmNj5cfH9tbW3b6+gQEBgQIC//j4/+Xlyb/1AgL/Cgj9b2Bg4sPD58jWAgL/AgL/dGWDx62t9dXV3L29gQEBgQIC//z8/+fn8dbkCgn+AgL/cWKIqJGR9NTUIR36AgL/a1600LW189PT3b6+gQEBgQIC/////+Li+tnZiXnvAgL/XVHldWVlwKamPjbzAgL/iXi+9tbW7s7O2ru7gQEBgQIC/////9/f99bW/+bmhXTqCgj9k3/lnojWCgj9WE3x/9/f+NjY7c3N1ba2gQEBgQIC/////+Li+NfX/t3d/Nvb99bWwqjeuqHf0LTa+9vb/+Dg/Nzc8NDQ1LW1gQEBgQIC//39/+jo/97e89XVpZiY7c7O9NTUwqmphnR0fGxssJmZ+NnZ89PT17i4gQEBgQIC//v7/+Dg5MbcWk7zs6bEeWt5aFvBJyL3Ghf8b2Hmp5GfhHJy9NTU3L29gQEBgQIC/////+fn/9/fkH7sCgn+AgL/AgL/WE3ysZrocmTxKiT54sTK7MzM3r+/gQEBgQIC/////+3t/+fn/+Xl+eLowbj28dXj/Nvb+tnZ/t3d4cfl/t7e9NTU1re3gQEBgQIC//////b2/+np/+fn/+bm//X1//Dw/+vr/+Xl/+Li/+fn/+np/+Li5sbGgQEBgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICgQICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgAAAAgAAAAQAAAAAEAGAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAACBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAQGBAQGBAgL/9vb/5ub/6Oj829v31tb21dX21dX21dX21dX21dX11NT01NT01NT01NTz09Pz09Pz09Py0tLx0dHw0NDszMzuzs7w0NDx0dHx0dHx0dHx0dHszMzmxsbQsbGBAQGBAgL/////7Oz/9vb/5ub/39//3t7/3t7+3d3+3d3/3t7+3d393d383Nz83Nz83Nz83Nz83Nz83Nz729v62tr11dX21tb319f42Nj42Nj62tr729v01NTvz8/YubmBAQGBAgL/////7e3/8PD/7Oz/4+P/4OD/39//39//39//39//3t7+3t793d393d393d3+3t7+3t7+3t793d383Nz319f42Nj42Nj42Nj52dn729v93d342Njx0dHZurqBAQGBAgL/////7Oz/6+v/8vL/5eX/4eH/39//39//39//39/42dndwMDFrKy1np7FrKzcwMD/39//39/+3t783Nz42Nj42Nj42Nj42Nj52dn729v93d383Nzw0NDXuLiBAQGBAgL/////6en/5ub/9PT/5+f/4OD/3t7/3t7/3t7AqLZ6aqhoWsBiVdN9bdOTgL56amp0ZWWbiIjqzc3729v52dn62tr83Nz62tr42Nj62tr93d393d3x0dHXuLiBAQGBAgL/9/f/4eH+3d3/5+f/5eX/3t7419f419d9bNIZFvoCAv8sJvJ7a+l3aO0SD/wCAv89NepxY4l1ZmawmZn21tb93d3+3t793d342Nj62tr93d393d321tbdvr6BAQGBAgL//Pz/4eH93Nz/4eH/6en93Nz52NhxYuYCAv8CAv8KCP2RfZP72tr83Nzfw+EKCf4CAv8KCf5ZTdFzZGqslpb93d3+3t7729v319f62tr83Nz83Nz11dXau7uBAQGBAgL/////5+f/4OD/4uL/7u7/4ODFq+ECAv8CAv8CAv84Me6bh4f+3d3+3t7+3t6gjOoCAv8CAv8CAv9WS9hwYmLPtLT729v319f42Nj62tr729v52dnx0dHWt7eBAQGBAgL/////6Oj/4eH/4+P/6en/5eWIduwCAv8CAv8CAv8/N+yTgYH/39//39//39//399COvcCAv8CAv8CAv9tX616amr01NT319f42Nj52dn52dn21tbuzs7ZurqBAQGBAgL/9vb93Nz93Nz/4uL/5eX/7OxaTvMCAv8CAv8CAv8zLfKGdXX/4OD/4OD/39//39+ZhuwCAv8CAv8CAv8SEP1zZGrXu7v319f42Nj42Nj42Nj11dX01NTbvLyBAQGBAgL/9/f+3d352Nj/4uL/4+P/7e2Bce8CAv8CAv8CAv8gHPh5amr42tr/4eH/4OD/4ODpzOICAv8CAv8CAv8CAv9wYZ+1np742Nj42Nj52dn52dn83Nz21tbev7+BAQGBAgL/+fn+3d3+3d3/4eH/4eH/6OixoO4CAv8CAv8CAv8KCf51ZnTMsrL/3t7+3t7/39//398iHvsCAv8CAv8CAv9dUc6ZhYX52dn52dn52dn42Nj93d311dXcvb2BAQGBAgL/+vr+3d3/4OD/4eH/4uL/5eXp2vAKCf4CAv8CAv8CAv9oWreYhIT62dn62dn62tr729s5MvcCAv8CAv8CAv89Neqtl5f42Nj42Nj42Nj42Nj729v11dXcvb2BAQGBAgL//f3/3t731tb/4OD/4uL/5OT/8vKBdPICAv8CAv8CAv8+NutzZGTdwcH/39/+3t742NhYTPECAv8CAv8CAv9USdbFq6v319f319f319f729v83Nz11dXev7+BAQGBAgL/////4uL31tb31tb21dX829v/7Oz55uw6M/gCAv8CAv8CAv9yZKKCcnL42tr/4OD/4OBSSPUCAv8CAv8CAv94aMb729v319f319f52dn93d393d3319ffwMCBAQGBAgL/////5ub+3d372tr72tr62dn+3d3/6enhy+k6M/gCAv8CAv8ZFvp2aHaPfn7HsLDZv8UaF/wCAv8CAv88NfLz1dX+3t793d393d393d393d393d3319fev7+BAQGBAgL/+vr/5+f/4eH/39//3t7/3t7/39//6Oj+3d3/4+OPfOoSEP0CAv8xK/d7bdOGd7VUSucCAv8CAv9PRvPpzeP/4OD/39/+3t793d393d3+3t793d3319fev7+BAQGBAgL/+vr/4OD/39//4OD/4OD/39//39//5eX/4+P/5OT829vnyd+hjetiVvNCOvdCOvdSSPWBcvDBquj/4eH/4OD/4OD/39/+3t793d393d3+3t793d342NjgwMCBAQGBAgL//f3/4OD/3t7/4eH/39//3t7/3t7/4eH/6ur/5ub93Nz62dn/4OD/4eH/4uL/4uL/4uL/4eH/4eH/4eH/4OD/39//39/+3t762tr729v+3t7+3t752dngwMCBAQGBAgL//Pz/4OD/4eH/39/829v72tr62dn829v/5eXHt7fv0ND31tb/39//4OD/4eH/4uL43NyumpqPfn6GdnaciIjSuLj319f21tb11dX21tb+3t7/39/52dngwMCBAQGBAgL/+fn/5eX/4eH93Nz31tb21dX21dX419eCcth2b42Gdnbbvr7/3t7/39//4ODAqbdVS+AtKPQgHPg/N+xsXqxwYmKQfX3qzMz42Nj21tb+3t7/39/52dngwMCBAQGBAgL//Pz/6Oj93Nz52Nj31tb31tb31taFc+kCAv8hIPx0Z51xYmKJd3eplJRwYsgZFvoCAv8CAv8CAv8CAv8CAv8zLfJ1ZoR8bGzavr742Nj21tb93d342NjfwMCBAQGBAgL/////4+P419f31tb419f419f31tby0thZTfICAv8CAv8nIfZMQt8nIvcCAv8CAv8CAv8KCf5AOPVfU/AaFvsCAv8SEP1yZKJ5aWnu0ND21tb319f21tbdvr6BAQGBAgL/////4OD31tb31tb31tb21dX21dX21dX52Nh6cPUCAv8CAv8CAv8CAv8CAv8CAv9dUe7ixNr52Nj83Nzx0+FyZPECAv8KCf7GrcP83Nz42Nj11dXvz8/au7uBAQGBAgL/////4uL52Nj419f419f52Nj31tb31tb31tb/4uLRyvhaUPVBOPVAN/RnWe7avdv31tb52Nj829v+3t7/4OD/4OCRf+2xm+n/39/93d362tr319fvz8/VtraBAQGBAgL//f3/6Oj/39//3t7/3t7/3t7829v62dn52Nj62dn/5ub/6ur/39/62dn419f31tb419f62dn93Nz/39//4OD/39//39//39//39//39/83Nz52dnw0NDXuLiBAQGBAgL/+/v/4OD72tr+3d3/3t7/4OD/4OD/39//3t7+3d3/4OD/5OT/5eX/39/829v62dn52Nj72tr/39//4OD729v21tb21tb729v/4OD/39/+3t762try0tLZurqBAQGBAgL/////5+f/39//3t7+3d372tr62dn72tr/39//4eH/4+P/7u7829v/4eH/39//3t7+3d3/3t7/4OD419f01NT01NT01NT21tb/4OD/4OD/39/83Nz01NTau7uBAQGBAgL/////7e3/5+f/5ub/5ub/5eX/4uL93Nz72tr/3t7/5eX/7u7/5ub829v31tb52Nj/4uL/4uL52Nj31tb319f21tb21tb93d3/4uL/4uL/4eH/39/42Njev7+BAQGBAgL/////9vb/6en/6Oj/5+f/6Oj/7+//7Oz/5ub/4+P/6ur/9PT/+fn/7Oz/5ub/4uL/39//39//39//39//39//39//6ur/6+v/6ur/6en/6en/5+f/4ODnx8eBAQGBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgKBAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==">
+
+
+<script type="text/javascript">
+var cv;
+var ctx;
+var audio;
+var osc=[];
+var gain=[];
+var merge;
+var scr;
+var lxl,lxr;
+var run=1;
+var width=1;
+var eraserate=5;
+var started=0;
+var c=0;
+var lastx=0,lasty=0;
+var lastpx=0,lastpxl=0,lastpxr=0,lastpy=0;
+var zmax=0;
+var display3d=true;
+function process(ev) {
+	var in0=ev.inputBuffer.getChannelData(0);
+	var in1=ev.inputBuffer.getChannelData(1);
+	var out0=ev.outputBuffer.getChannelData(0);
+	var out1=ev.outputBuffer.getChannelData(1);
+	var er=(1-(eraserate+100)/200);
+	ctx.fillStyle="rgba(0,0,0,"+er+")";
+	ctx.fillRect(0,0,512,512);
+	ctx.fillStyle="rgba(200,200,255,0.2)";//#446";
+	if(display3d) {
+		ctx.fillRect(128-100,256-100,200,1);
+		ctx.fillRect(128-100,256+100,200,1);
+		ctx.fillRect(128-100,256-100,1,200);
+		ctx.fillRect(128+100,256-100,1,200);
+		ctx.fillRect(128,256-100,1,200);
+		ctx.fillRect(128-100,256,200,1);
+		ctx.fillRect(384-100,256-100,200,1);
+		ctx.fillRect(384-100,256+100,200,1);
+		ctx.fillRect(384-100,256-100,1,200);
+		ctx.fillRect(384+100,256-100,1,200);
+		ctx.fillRect(384,256-100,1,200);
+		ctx.fillRect(384-100,256,200,1);
+	}
+	else {
+		ctx.fillRect(256-200,256-200,400,1);
+		ctx.fillRect(256-200,256+200,400,1);
+		ctx.fillRect(256-200,256-200,1,400);
+		ctx.fillRect(256+200,256-200,1,400);
+		ctx.fillRect(256,256-200,1,400);
+		ctx.fillRect(256-200,256,400,1);
+	}
+	ctx.strokeStyle="#9a9";
+	ctx.lineWidth=width;
+	ctx.lineCap="round";
+	ctx.lineJoin="round";
+	ctx.beginPath();
+	ctx.moveTo(lastpx,lastpy);
+	var x=0,y=0;
+	for(var i=0;i<1024;++i) {
+		x=in0[i];
+		y=in1[i];
+		if(run==0)
+			x=y=0;
+		out0[i]=x*monitor;
+		out1[i]=y*monitor;
+		if(display3d) {
+			z=(x-lastx);
+			lastx=x;
+			zmax=Math.max(zmax*0.999,Math.abs(z));
+			if(zmax)
+				z=z/zmax;
+			var zr=100/(z+3);
+			var pxl=(x+.05)*zr+128;
+			var pxr=(x-.05)*zr+384;
+			var py=(y*zr+256);
+			if(x!=lastx || y!=lasty) {
+				if(pxl!=lastpxl||py!=lastpy) {
+					ctx.moveTo(lastpxl,lastpy);
+					ctx.lineTo(pxl,py);
+				}
+				if(pxr!=lastpxr||py!=lastpy) {
+					ctx.moveTo(lastpxr,lastpy);
+					ctx.lineTo(pxr,py);
+				}
+			}
+			lastx=x,lasty=y;
+			lastpxl=pxl,lastpxr=pxr,lastpy=py;
+		}
+		else {
+			var px=x*100+256;
+			var py=y*100+256;
+			if(px!=lastpx||py!=lastpy) {
+				ctx.lineTo(px,py);
+				lastpx=px,lastpy=py;
+			}
+		}
+//		if(++c>10000) {
+//			c=0;
+//			console.log(z);
+//		}
+	}
+	ctx.stroke();
+}
+function init() {
+	window.AudioContext=window.webkitAudioContext||window.AudioContext;
+	cv=document.getElementById("canvas");
+	ctx=cv.getContext("2d");
+	ctx.fillStyle="#0f0";
+	ctx.fillRect(0,0,512,512);
+	audio=new AudioContext();
+	scr=audio.createScriptProcessor(1024);
+	merge=audio.createChannelMerger(2);
+	gainx=audio.createGain();
+	gainy=audio.createGain();
+	for(var i=0;i<4;++i) {
+		osc[i]=audio.createOscillator();
+		gain[i]=audio.createGain();
+		osc[i].connect(gain[i]);
+		if(i&2)
+			gain[i].connect(gainy);
+		else
+			gain[i].connect(gainx);
+	}
+	gainx.connect(merge,0,0);
+	gainy.connect(merge,0,1);
+	merge.connect(scr);
+	scr.onaudioprocess=process;
+	scr.connect(audio.destination);
+	setup();
+	var o=audio.createOscillator();
+}
+function play(s) {
+	run=s;
+	if(started==0) {
+		for(var i=0;i<4;++i)
+			osc[i].start(0);
+		started=1;
+	}
+}
+function sliderchanged(s) {
+	document.getElementById(s.id+"label").value=s.value;
+	setup();
+}
+function textchanged(s) {
+	document.getElementById(s.id.slice(0,s.id.length-5)).value=s.value;
+	setup();
+}
+function octup() {
+	for(var i=0;i<4;++i) {
+		var e=document.getElementById("freq"+(i+1)+"label");
+		e.value=parseFloat(e.value)*2;
+	}
+	setup();
+}
+function octdown() {
+	for(var i=0;i<4;++i) {
+		var e=document.getElementById("freq"+(i+1)+"label");
+		e.value=parseFloat(e.value)*0.5;
+	}
+	setup();
+}
+
+function set9p3() {
+	for(var i=0;i<4;++i) {
+		var e=document.getElementById("freq"+(i+1)+"label");
+		e.value=parseFloat(e.value)*9.3;
+	}
+	setup();
+}
+function try186() {
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(20.9251);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(18.62);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(18.61);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(20.9251);
+
+	setup();
+}
+
+function tryhmm() {
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(144.26);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(144.42);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(252.444);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(36.1);
+
+	setup();
+}
+
+function tryhmm2() {
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(433);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(144.42);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(252.444);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(36.1);
+
+	setup();
+}
+
+function tryhmm3() {
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(288.5);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(144.42);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(252.444);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(36.1);
+
+	setup();
+}
+function tryhmm4() {
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(2000);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(465);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(512);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(512);
+
+	setup();
+}
+function tryhmm5() {
+	i=0; 
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(2000);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(744);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(512);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(512);
+
+	setup();
+}
+
+
+function tryhmm6() {
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(509);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(516);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(512);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(512);
+
+	setup();
+}
+
+
+function tryhmm7() {
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(256);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(1024);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(769);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(64);
+
+	setup();
+}
+
+
+function tryhmm8() {
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(585);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(389);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(389);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(4096);
+
+	setup();
+}
+
+
+function tryhmm9() {
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(4096);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(628);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(4096);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(4096);
+
+	setup();
+}
+
+
+
+function tryhmm10() {
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(128);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(0.314);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(383);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(512);
+
+	setup();
+}
+
+
+function tryhmm11() {
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(174);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(3696);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(174.05);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(3696);
+
+	setup();
+}
+
+
+
+
+function setup() {
+	for(var i=0;i<4;++i) {
+		var t=parseFloat(document.getElementById("freq"+(i+1)+"label").value);
+		osc[i].frequency.value=t;
+		t=parseFloat(document.getElementById("gain"+(i+1)+"label").value);
+		gain[i].gain.value=t*0.01;
+		t=document.getElementById("type"+(i+1)).selectedIndex;
+		osc[i].type=["sine","sawtooth","square"][t];
+	}
+	width=parseFloat(document.getElementById("width").value);
+	document.getElementById("widthlabel").innerHTML=width+"pix";
+	eraserate=parseFloat(document.getElementById("erase").value);
+	document.getElementById("eraselabel").innerHTML=eraserate;
+	var t=parseFloat(document.getElementById("monitor").value);
+	document.getElementById("monitorlabel").innerHTML=t;
+	monitor=t*0.01;
+	display3d=document.getElementById("3d").selectedIndex;
+}
+</script>
+<h1>3D Lissajous ° Sonic Compression ° 18.6 Hz</h1>
+<canvas id="canvas" width="512" height="512" style="float:left;margin:5px">
+</canvas>
+<div style="display:inline-block;margin:5px">
+<button id="play" onclick="play(1)">Play</button><button id="stop" onclick="play(0)">Stop</button><br>
+<button onclick="octup()">Octave Up</button>
+<button onclick="octdown()">Octave down</button>
+
+<button onclick="set9p3()">Set multipels of 9.3 (18.6)</button>
+
+<button onclick="tryhmm()">Set Hmm-pattern ~186</button>
+<button onclick="tryhmm2()">Set Hmm-pattern ~186</button>
+<button onclick="tryhmm3()">Set Hmm-pattern ~186</button>
+<button onclick="tryhmm4()">Set Hmm-pattern ~186</button>
+<button onclick="tryhmm5()">Set Hmm-pattern ~186</button>
+<button onclick="tryhmm6()">Set Hmm-pattern ~186</button>
+<button onclick="tryhmm7()">Set Hmm-pattern ~186</button>
+<button onclick="tryhmm8()">Set Hmm-pattern ~186</button>
+<button onclick="tryhmm9()">Set Hmm-pattern ~186</button>
+<button onclick="tryhmm10()">Set Hmm-pattern ~186</button>
+<button onclick="tryhmm11()">Set Hmm-pattern ~186</button>
+
+<br><br>
+
+<div><div style="display:inline-block;width:50px">OSC</div><div style="display:inline-block;width:90px">Form</div><div style="display:inline-block;width:250px">Frequency (Hz)</div><div style="display:inline-block">Level</div></div>
+
+<div style="height:30px">
+<div style="display:inline-block;width:30px">X-1: </div>
+<select id="type1" onchange="setup()" style="width:70px"><option>Sine</option><option>Saw</option><option>Square</option></select>
+<input type="range" id="freq1" oninput="sliderchanged(this)" onchange="sliderchanged(this)" min="0" max="1000" value="156" style="width:200px;height:20px">
+<input type="text" value="156.2" id="freq1label" size="4" onchange="textchanged(this)" style="width:40px">
+<input type="range" id="gain1" style="width:100px;height:20px" value="100" oninput="sliderchanged(this)" onchange="sliderchanged(this)">
+<input type="text" id="gain1label" value="100" size="3" onchange="textchanged(this)" style="width:30px"><br>
+</div>
+
+<div style="height:30px">
+<div style="display:inline-block;width:30px">X-2: </div>
+<select id="type2" onchange="setup()" style="width:70px"><option>Sine</option><option>Saw</option><option>Square</option></select>
+<input type="range" id="freq2" oninput="sliderchanged(this)" onchange="sliderchanged(this)" min="0" max="1000" value="195" style="width:200px">
+<input type="text" value="195.3" id="freq2label" size="4" onchange="textchanged(this)" style="width:40px">
+<input type="range" id="gain2" style="width:100px" value="100" oninput="sliderchanged(this)" onchange="sliderchanged(this)">
+<input type="text" id="gain2label" value="100" size="3" onchange="textchanged(this)" style="width:30px"><br>
+</div>
+
+<div style="height:30px">
+<div style="display:inline-block;width:30px">Y-1: </div>
+<select id="type3" onchange="setup()" style="width:70px"><option>Sine</option><option>Saw</option><option>Square</option></select>
+<input type="range" id="freq3" oninput="sliderchanged(this)" onchange="sliderchanged(this)" min="0" max="1000" value="236" style="width:200px">
+<input type="text" value="235.76" id="freq3label" size="4" onchange="textchanged(this)" style="width:40px">
+<input type="range" id="gain3" style="width:100px" value="99" oninput="sliderchanged(this)" onchange="sliderchanged(this)">
+<input type="text" id="gain3label" value="99" size="3" onchange="textchanged(this)" style="width:30px"><br>
+</div>
+
+<div style="height:30px">
+<div style="display:inline-block;width:30px">Y-2: </div>
+<select id="type4" onchange="setup()" style="width:70px"><option>Sine</option><option>Saw</option><option>Square</option></select>
+<input type="range" id="freq4" oninput="sliderchanged(this)" onchange="sliderchanged(this)" min="0" max="1000" value="391" style="width:200px">
+<input type="text" value="391.22" id="freq4label" size="4" onchange="textchanged(this)" style="width:40px">
+<input type="range" id="gain4" style="width:100px" value="100" oninput="sliderchanged(this)" onchange="sliderchanged(this)">
+<input type="text" id="gain4label" value="100" size="3" onchange="textchanged(this)" style="width:30px"><br>
+</div>
+
+<br>
+<div style="height:30px">
+<div style="display:inline-block;width:80px">LineWidth: </div>
+<input type="range" id="width" oninput="setup()" onchange="setup()" min="1" max="20" value="1" style="width:200px;margin:5px"><span id="widthlabel">1pix</span>
+</div>
+
+<div style="height:30px">
+<div style="display:inline-block;width:80px">EraseRate: </div>
+<input type="range" id="erase" oninput="setup()" onchange="setup()" min="0" max="100" value="67" style="width:200px;margin:5px"><span id="eraselabel">67</span>
+</div>
+
+<div style="height:30px">
+<div style="display:inline-block;width:80px">Volume: </div>
+<input type="range" id="monitor" oninput="setup()" onchange="setup()" min="0" max="100" value="100" style="width:200px;margin:5px"><span id="monitorlabel">100</span>
+</div>
+<br>
+
+<div style="height:30px">
+Display : <select id="3d" onchange="setup()"><option>2D</option><option selected="">3D (Parallel-eyes Stereogram)</option></select>
+</div>
+
+</div>
+<br clear="both">
+
+
+<script>
+	init();
+	
+	function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+
+    alert( urlParams.get("action") );
+};
+</script>
+
+
