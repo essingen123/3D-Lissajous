@@ -1,10 +1,11 @@
 <meta charset="utf-8">
 <style type="text/css">
 body {
-	font-family:Helvetica, Arial;
+	font-family: Trebuchet;
 	color: #909090;
 	background:#090909;
-}
+	font-style: normal;
+	font-size: 0.75%;
 button {
 	border:1px solid #888;
 	border-radius: 3px;
@@ -31,6 +32,34 @@ input[type="range"]::-ms-tooltip {
 
 
 <script type="text/javascript">
+
+
+	
+	function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+	};
+
+
+// alert(); 
+
+// osc hz 
+// split-explode "array" with elimiter x
+//for( apa as console.log( split(var str = getUrlParameter("a"), "x"))) )
+
+//	for(  a  in getUrlParameter("a").split( "x" ) )
+// alert(a(0));
+
+// osc amplitude, vol
+//getUrlParameter("b"); // explode "array" with elimiter x
+
+// osc timbre basic type, waveform
+//getUrlParameter("c"); // explode "array" with elimiter x
+
+
+
 var cv;
 var ctx;
 var audio;
@@ -56,7 +85,7 @@ function process(ev) {
 	var er=(1-(eraserate+100)/200);
 	ctx.fillStyle="rgba(0,0,0,"+er+")";
 	ctx.fillRect(0,0,512,512);
-	ctx.fillStyle="rgba(200,200,255,0.2)";//#446";
+	ctx.fillStyle="rgba(100,100,255,0.2)";//#446";
 	if(display3d) {
 		ctx.fillRect(128-100,256-100,200,1);
 		ctx.fillRect(128-100,256+100,200,1);
@@ -380,61 +409,79 @@ function setup() {
 	display3d=document.getElementById("3d").selectedIndex;
 }
 </script>
-<h1>3D Lissajous ° Sonic Compression ° 18.6 Hz</h1>
+
+
 <canvas id="canvas" width="512" height="512" style="float:left;margin:5px">
 </canvas>
+
+
+
 <div style="display:inline-block;margin:5px">
-<button id="play" onclick="play(1)">Play</button><button id="stop" onclick="play(0)">Stop</button><br>
-<button onclick="octup()">Octave Up</button>
-<button onclick="octdown()">Octave down</button>
+	<h1>3D Lissajous ° Sonic Compression </h1>
 
-<button onclick="set9p3()">Set multipels of 9.3 (18.6)</button>
 
-<button onclick="tryhmm()">Set Hmm-pattern ~186</button>
-<button onclick="tryhmm2()">Set Hmm-pattern ~186</button>
-<button onclick="tryhmm3()">Set Hmm-pattern ~186</button>
-<button onclick="tryhmm4()">Set Hmm-pattern ~186</button>
-<button onclick="tryhmm5()">Set Hmm-pattern ~186</button>
-<button onclick="tryhmm6()">Set Hmm-pattern ~186</button>
-<button onclick="tryhmm7()">Set Hmm-pattern ~186</button>
-<button onclick="tryhmm8()">Set Hmm-pattern ~186</button>
-<button onclick="tryhmm9()">Set Hmm-pattern ~186</button>
-<button onclick="tryhmm10()">Set Hmm-pattern ~186</button>
-<button onclick="tryhmm11()">Set Hmm-pattern ~186</button>
 
-<br><br>
+ <button>  <a class="toggle" href="#example"> Show/Hide Controls </a></button> 
 
-<div><div style="display:inline-block;width:50px">OSC</div><div style="display:inline-block;width:90px">Form</div><div style="display:inline-block;width:250px">Frequency (Hz)</div><div style="display:inline-block">Level</div></div>
+<div class="toggle-content" id="example">
 
-<div style="height:30px">
-<div style="display:inline-block;width:30px">X-1: </div>
-<select id="type1" onchange="setup()" style="width:70px"><option>Sine</option><option>Saw</option><option>Square</option></select>
-<input type="range" id="freq1" oninput="sliderchanged(this)" onchange="sliderchanged(this)" min="0" max="1000" value="156" style="width:200px;height:20px">
-<input type="text" value="156.2" id="freq1label" size="4" onchange="textchanged(this)" style="width:40px">
-<input type="range" id="gain1" style="width:100px;height:20px" value="100" oninput="sliderchanged(this)" onchange="sliderchanged(this)">
-<input type="text" id="gain1label" value="100" size="3" onchange="textchanged(this)" style="width:30px"><br>
-</div>
 
-<div style="height:30px">
-<div style="display:inline-block;width:30px">X-2: </div>
-<select id="type2" onchange="setup()" style="width:70px"><option>Sine</option><option>Saw</option><option>Square</option></select>
-<input type="range" id="freq2" oninput="sliderchanged(this)" onchange="sliderchanged(this)" min="0" max="1000" value="195" style="width:200px">
-<input type="text" value="195.3" id="freq2label" size="4" onchange="textchanged(this)" style="width:40px">
-<input type="range" id="gain2" style="width:100px" value="100" oninput="sliderchanged(this)" onchange="sliderchanged(this)">
-<input type="text" id="gain2label" value="100" size="3" onchange="textchanged(this)" style="width:30px"><br>
-</div>
+<div style="display: none;">
 
-<div style="height:30px">
-<div style="display:inline-block;width:30px">Y-1: </div>
-<select id="type3" onchange="setup()" style="width:70px"><option>Sine</option><option>Saw</option><option>Square</option></select>
-<input type="range" id="freq3" oninput="sliderchanged(this)" onchange="sliderchanged(this)" min="0" max="1000" value="236" style="width:200px">
-<input type="text" value="235.76" id="freq3label" size="4" onchange="textchanged(this)" style="width:40px">
-<input type="range" id="gain3" style="width:100px" value="99" oninput="sliderchanged(this)" onchange="sliderchanged(this)">
-<input type="text" id="gain3label" value="99" size="3" onchange="textchanged(this)" style="width:30px"><br>
-</div>
+		<button onclick="octup()">Octave Up</button>
+		<button onclick="octdown()">Octave down</button>
+
+		<button onclick="set9p3()">Set multipels of 9.3 (18.6)</button>
+
+		<button onclick="tryhmm()">Set Hmm-pattern ~186</button>
+		<button onclick="tryhmm2()">Set Hmm-pattern ~186</button>
+		<button onclick="tryhmm3()">Set Hmm-pattern ~186</button>
+		<button onclick="tryhmm4()">Set Hmm-pattern ~186</button>
+		<button onclick="tryhmm5()">Set Hmm-pattern ~186</button>
+		<button onclick="tryhmm6()">Set Hmm-pattern ~186</button>
+		<button onclick="tryhmm7()">Set Hmm-pattern ~186</button>
+		<button onclick="tryhmm8()">Set Hmm-pattern ~186</button>
+		<button onclick="tryhmm9()">Set Hmm-pattern ~186</button>
+		<button onclick="tryhmm10()">Set Hmm-pattern ~186</button>
+		<button onclick="tryhmm11()">Set Hmm-pattern ~186</button>
+</div> 
+
+	<div>
+		<div style="display:inline-block;width:50px">OSC</div>
+		<div style="display:inline-block;width:90px">Form</div>
+		<div style="display:inline-block;width:250px">Frequency (Hz)</div>
+		<div style="display:inline-block">Level</div>
+	</div>
+
+	<div style="height:30px">
+			<div style="display:inline-block;width:30px">X-1 </div>
+	<select id="type1" onchange="setup()" style="width:70px"><option>Sine</option><option>Saw</option><option>Square</option></select>
+	<input type="range" id="freq1" oninput="sliderchanged(this)" onchange="sliderchanged(this)" min="0" max="1000" value="156" style="width:200px;height:20px">
+	<input type="text" value="156.2" id="freq1label" size="4" onchange="textchanged(this)" style="width:40px">
+	<input type="range" id="gain1" style="width:100px;height:20px" value="100" oninput="sliderchanged(this)" onchange="sliderchanged(this)">
+	<input type="text" id="gain1label" value="100" size="3" onchange="textchanged(this)" style="width:30px"><br>
+	</div>
 
 <div style="height:30px">
-<div style="display:inline-block;width:30px">Y-2: </div>
+	<div style="display:inline-block;width:30px">X-2 </div>
+	<select id="type2" onchange="setup()" style="width:70px"><option>Sine</option><option>Saw</option><option>Square</option></select>
+	<input type="range" id="freq2" oninput="sliderchanged(this)" onchange="sliderchanged(this)" min="0" max="1000" value="195" style="width:200px">
+	<input type="text" value="195.3" id="freq2label" size="4" onchange="textchanged(this)" style="width:40px">
+	<input type="range" id="gain2" style="width:100px" value="100" oninput="sliderchanged(this)" onchange="sliderchanged(this)">
+	<input type="text" id="gain2label" value="100" size="3" onchange="textchanged(this)" style="width:30px"><br>
+	</div>
+
+	<div style="height:30px">
+	<div style="display:inline-block;width:30px">Y-1 </div>
+	<select id="type3" onchange="setup()" style="width:70px"><option>Sine</option><option>Saw</option><option>Square</option></select>
+	<input type="range" id="freq3" oninput="sliderchanged(this)" onchange="sliderchanged(this)" min="0" max="1000" value="236" style="width:200px">
+	<input type="text" value="235.76" id="freq3label" size="4" onchange="textchanged(this)" style="width:40px">
+	<input type="range" id="gain3" style="width:100px" value="99" oninput="sliderchanged(this)" onchange="sliderchanged(this)">
+	<input type="text" id="gain3label" value="99" size="3" onchange="textchanged(this)" style="width:30px"><br>
+	</div>
+
+<div style="height:30px">
+	<div style="display:inline-block;width:30px">Y-2 </div>
 <select id="type4" onchange="setup()" style="width:70px"><option>Sine</option><option>Saw</option><option>Square</option></select>
 <input type="range" id="freq4" oninput="sliderchanged(this)" onchange="sliderchanged(this)" min="0" max="1000" value="391" style="width:200px">
 <input type="text" value="391.22" id="freq4label" size="4" onchange="textchanged(this)" style="width:40px">
@@ -442,42 +489,103 @@ function setup() {
 <input type="text" id="gain4label" value="100" size="3" onchange="textchanged(this)" style="width:30px"><br>
 </div>
 
+
+<div style="display: none;">
+
 <br>
 <div style="height:30px">
-<div style="display:inline-block;width:80px">LineWidth: </div>
+	<div style="display:inline-block;width:80px">LineWidth </div>
 <input type="range" id="width" oninput="setup()" onchange="setup()" min="1" max="20" value="1" style="width:200px;margin:5px"><span id="widthlabel">1pix</span>
 </div>
 
+
 <div style="height:30px">
-<div style="display:inline-block;width:80px">EraseRate: </div>
+
+	<div style="display:inline-block;width:80px">EraseRate </div>
 <input type="range" id="erase" oninput="setup()" onchange="setup()" min="0" max="100" value="67" style="width:200px;margin:5px"><span id="eraselabel">67</span>
 </div>
 
 <div style="height:30px">
-<div style="display:inline-block;width:80px">Volume: </div>
-<input type="range" id="monitor" oninput="setup()" onchange="setup()" min="0" max="100" value="100" style="width:200px;margin:5px"><span id="monitorlabel">100</span>
+	<div style="display:inline-block;width:80px">Volume </div>
+<input type="range" id="monitor" oninput="setup()" onchange="setup()" min="0" max="100" value="20" style="width:200px;margin:5px"><span id="monitorlabel">100</span>
 </div>
+
 <br>
 
-<div style="height:30px">
-Display : <select id="3d" onchange="setup()"><option>2D</option><option selected="">3D (Parallel-eyes Stereogram)</option></select>
 </div>
 
-</div>
-<br clear="both">
 
+
+	<div style="height:30px">
+	Display <select id="3d" onchange="setup()"><option>2D</option><option >3D (Parallel-eyes Stereogram)</option></select>
+	</div>
+
+
+
+<button id="play" onclick="play(1)">Play</button><button id="stop" onclick="play(0)">Stop</button><br>
+
+
+ 
+</div>
+
+
+</div>
 
 <script>
 	init();
 	
-	function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 
-    alert( urlParams.get("action") );
+
+	i=0;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(338);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(560);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(448);
+	++i;
+	var e=document.getElementById("freq"+(i+1)+"label");e.value=parseFloat(674);
+
+	setup();
+
+var show = function (elem) {
+	elem.style.display = 'block';
 };
+
+var hide = function (elem) {
+	elem.style.display = 'none';
+};
+
+var toggle = function (elem) {
+
+	// If the element is visible, hide it
+	if (window.getComputedStyle(elem).display === 'block') {
+		hide(elem);
+		return;
+	}
+
+	// Otherwise, show it
+	show(elem);
+
+};
+
+// Listen for click events
+document.addEventListener('click', function (event) {
+
+	// Make sure clicked element is our toggle
+	if (!event.target.classList.contains('toggle')) return;
+
+	// Prevent default link behavior
+	event.preventDefault();
+
+	// Get the content
+	var content = document.querySelector(event.target.hash);
+	if (!content) return;
+
+	// Toggle the content
+	toggle(content);
+
+}, false);
 </script>
- 
+
+
 
